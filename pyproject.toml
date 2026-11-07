@@ -1,0 +1,18 @@
+[project]
+name = "neko_wot"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = []
+
+# 只给开发/验收用：不进 vendor/，不进发布包，运行期依赖仍然是 []。
+[dependency-groups]
+dev = [
+    "pytest",
+    "pytest-randomly",
+    "pytest-asyncio",
+    "ruff==0.12.4",
+]
+
+# pytest 的配置在 ``tests/pytest.ini``：本仓库根目录就是插件包（根上有 ``__init__.py``），
+# 而包目录名里带点（``n.e.k.o_plugin_neko_wot``）。把 rootdir 定在 ``tests/`` 可以避免
+# pytest 把仓库根当成一个"包"去导入，同时统一 asyncio 模式。

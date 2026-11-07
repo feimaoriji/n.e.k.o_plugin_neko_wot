@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "seq": 1180,
+  "ts": 1700000421.0,
+  "mode": "battle_end",
+  "arena_id": "demo-Ch71_WZ_219-0",
+  "game_version": "2.4.1.0",
+  "player_id": 1000000001,
+  "me": {
+    "name": "TestPlayer",
+    "vehicle": "Ch71_WZ_219",
+    "vehicle_name": "WZ-219",
+    "tier": 10,
+    "type": "heavyTank",
+    "health": 640,
+    "max_health": 2200,
+    "health_ratio": 0.291,
+    "alive": true,
+    "pos": [512.0, -88.25, 704.5],
+    "ammo": {"ready": 0, "total": 12},
+    "reload_ratio": 0.0,
+    "crew": {
+      "commander": true,
+      "gunner": true,
+      "driver": true,
+      "radioman": true,
+      "loader": true
+    },
+    "modules": {
+      "engine": true,
+      "ammoBay": true,
+      "turretRotator": true,
+      "track": true,
+      "gun": true
+    },
+    "fires": 0,
+    "speed": 0.0
+  },
+  "team": null,
+  "result": {
+    "won": true,
+    "draw": false,
+    "survived": true,
+    "kills": 3,
+    "damage": 2870,
+    "assist": 415,
+    "blocked": 1200,
+    "spotting": 2,
+    "shots": 12,
+    "hits": 9,
+    "penetrations": 6,
+    "xp": 1240,
+    "credits": 32500,
+    "duration_s": 421,
+    "map": "拉斯威利",
+    "vehicle": "Ch71_WZ_219"
+  },
+  "events": [
+    {
+      "seq": 9,
+      "id": "battle_end",
+      "ts": 1700000421.0,
+      "payload": {}
+    }
+  ]
+}

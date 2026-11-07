@@ -1,0 +1,133 @@
+[plugin_runtime]
+enabled = true
+auto_start = false
+
+# World of Tanks 陪伴插件业务配置。
+# dry_run 默认 true：只打日志、不往对话通道说话。确认行为正常后再关。
+[neko_wot]
+dry_run = true
+# 留空 = %LOCALAPPDATA%\WoT_Copilot\state.json
+state_path = ""
+# tick（1s）内的采样间隔。写端约 4Hz 覆盖写，采得太慢会丢击杀。
+poll_interval_s = 0.25
+# ts 超过这个秒数没更新，就当"游戏没在跑"。
+stale_seconds = 5.0
+# 两句播报之间的全局最小间隔（秒），防止连珠炮。默认 2 秒。
+# 被间隔拦下的句子不丢：进排队（最多 3 条、时效 4 秒），间隔一过按优先级补说。
+min_gap_s = 2.0
+# 输出模式（v2.12 起三模式）：
+#   "verbatim" = 把审过的台词原文交给宿主，并要求模型**只复述**这句（附带字数上限），
+#                会出声（走 TTS）；1 次生成、不经改写。默认值。
+#   "bubble"   = 只弹气泡、不发声：0 token、不经 LLM 改写，也不建 callback / 不起 turn /
+#                不碰 TTS。给"看着就行、别出声"的场景用。
+#   "llm"      = 交给宿主 LLM 自由发挥（更早版本的行为，出声走 TTS）。
+#
+# 默认 verbatim 的理由：要验的是"台词表本身好不好"，走 LLM 会把固定台词改写成别的
+# 说法，措辞/长度/禁用词的问题就全被润色盖住了，测不出结论。
+# 等实机确认（见 README「输出模式」的验证待办）之后再决定线上默认值。
+# 写错/留空/不是字符串 → 一律回落到 verbatim，且不会让插件起不来。
+output_mode = "verbatim"
+# 打断（v2.12）：true = 高优先级事件（击杀/阵亡/残血…）可以顶掉还在排队的低优先级句子；
+# false = 只按先来后到，排队满了就丢最旧的一条。
+# 写错 → 回落到 true（保持 v2.11 及以前的观感）。
+interrupt_enabled = true
+# 空闲填空（v2.12）：距上次说话多少秒之后，才允许 info 档（状态/提示类）补一句，免得太安静。
+# 0 = 不做这道闸（info 档随时可以填空，只受 min_gap_s 与队列非空拦着）——注意这是"更爱说话"，不是"关掉"。
+# 上限 300（5 分钟）——再长就不算"填空"了。
+# 越界按边界算；写错/非数字/NaN → 回落到 10 秒。
+idle_fill_s = 10.0
+# 信息类播报（状态/提示，不是战斗事件）走哪条通道（v2.12）：
+#   "voice"  = 出声（走 TTS，v2.11 及以前唯一的路，默认）；
+#   "bubble" = 只在对话里弹一条气泡，0 token、不发声。
+# 写错/留空/不是字符串 → 一律回落到 voice，不会让插件起不来。
+info_channel = "voice"
+# 队伍事件（v1.30）：队友击杀 / 队友阵亡要不要出声。
+#   false（默认）= 一句都不说：击杀播报只聚焦**你自己**的战果（产品定位要求，
+#                  那一局 15 次队友击杀全播了，太吵）。
+#   true          = 只按 info 档（最低档）报一句，不抢阵亡/结算/残血那些话的位置。
+# 判据不变（还是看 team 里的存活计数变化），变的只是"说不说 + 哪一档"。
+# 写错/留空 → 回落到 false（说不清就安静，这条开关的本意就是少说话）。
+team_events_enabled = false
+# 决策日志（v2.15，默认 true）：把仲裁器每帧的判断写进插件日志
+# （N.E.K.O_Plugin_neko_wot_<日期>.log），一行一个决策点：
+#   arbiter: fresh=[you_hit,you_damaged] derived=[team_numbers]   ← 这一帧到了什么
+#   arbiter: pick critical=None warning=you_hit info=None          ← 每档选中谁
+#   drop you_died reason=type_cooldown(剩3.2s)                     ← 每个被丢的候选 + 真闸门名
+#   speak you_died level=critical text="我被击毁了…"                ← 真说出口的那句
+#   enqueue you_hit ttl=4.0 len=2 / expire … / discard …           ← 队列动作
+# 安静帧（没有新候选、队列也空）一行都不打，正常一局几十到一两百行。
+#   true  = 打（出问题时才有得复盘，别只靠耳朵排查）
+#   false = 一行都不打（只影响这些 INFO 行，不影响播报）
+# 写错/留空 → 回落到 true（排障优先）。
+debug_log = true
+
+# ── v2.18 / P1：陪伴四件套（复盘分档 / 战绩账本 / 连败关怀 / 二阶静默 / 话术预算）──
+# 这五条只改"说得多像人"，不新增任何关于敌方的播报；默认值一律取更安静的那一档。
+
+# ① 本地战绩账本（C2）：每局一行写到
+#    %LOCALAPPDATA%\WoT_Copilot\neko_battles.jsonl（只在本机、绝不上传；保留最近 500 局）。
+#    false = **不写不读**（一个字节都不落盘）；关掉后②的"历史均伤"档和③的连败关怀一并失效。
+history_enabled = true
+
+# ② 复盘分档（C1）：结算那一句按"这局发生了什么"换一种说法
+#    （赢得很猛 / 赢了但搭进去一条命 / 输得可惜 / 输得太快 / 结果没看清只报事实）。
+#    false = 回到 v2.17 那句默认结算文案。
+recap_enabled = true
+
+# ③ 静默二阶（C4）：战斗里距上次说话超过这么多秒、且这一局还没用过 → 说一句
+#    "我在呢"这类**不依赖任何战况**的陪伴，一局最多一次。0 = 关；上限 300。
+idle_deep_s = 60.0
+
+# ④ 单局话术总量（C8）：一局最多说多少句，超了直接丢弃（不排队）。0 = 不限。
+speech_budget_per_battle = 40
+
+# ⑤ 滑动窗上限（C8）：任意 30 秒内最多几句。critical（阵亡/结算/着火/残血）不受这条限制，
+#    但计入④的总量。1~20（要"完全放开"请把④设 0，而不是把这里改成 0）。
+speech_burst_max = 3
+
+# ── v2.19 / P2：C5 受击反应分档 / C6 劣势细分 / C7 开场人格化 ──
+# 三条都默认开；关掉任何一条都**完全回到 v2.18** 的观感。
+
+# ① 受击反应分档（C5）：按 you_damaged.delta / me.max_health 分档
+#    （<25% 保持现有血量句 / ≥25% 重话术 / ≥50% critical 档）。
+#    false = 不做任何升级（仍说 v2.18 的血量句）。
+hit_reaction_enabled = true
+
+# ② 受击档位（C5）：quiet（默认，按路线图口径）= ≥25% 重档 / ≥50% critical；
+#    full = 阈值下移到 15% / 35%（更敏感）。两档密度上限相同（15 秒同类冷却 / 单局 8 句）。
+#    写错/留空 → 回落 quiet（读不懂时不该反而喊得更响）。
+hit_reaction_level = "quiet"
+
+# ③ 劣势/残局细分（C6）：team_behind 按差值分 mild（1~2）/ big（≥3）/ endgame
+#    （我方 ≤2 且对方多 ≥3），每档一局最多一次、只在档位继续变差时开口（最多 3 句）。
+#    false = 回到 v2.18 那句"我们这边落后了，稳住。"（最多 2 句）。
+team_behind_tiers_enabled = true
+
+# ④ 开场人格化（C7）：用本机账本说"今天第 N 局 / 这台车均伤 / 这台车打过几局"，
+#    一局仍然只有一句。账本缺失/损坏/为空 → 自动退回通用开场句（绝不猜数字）。
+#    false = 永远用通用开场句。
+battle_start_persona_enabled = true
+
+# ── v2.20 / P3：断带双层播报 + 机制话术分档 ──
+# 只消费协议已有字段（you_hit.crits_devices / crits_count / crits、me.mech、
+# mode_switched.mech）；三条都默认开，关掉即回到 v2.19 的观感。
+
+# ① 断带 / 断轮双层（C5 之外的独立事件链）：只在 crits_count == 1（新 burst /
+#    设备集合变化）时说；critical（受损）→“履带伤了/轮子伤了”，
+#    destroyed（打断）→“履带断了/轮子断了”；blocked=true、crits_devices=[]、
+#    gun/turret 这类非行走机构一律不说；15 秒内最多 2 句。
+track_break_enabled = true
+
+# ② 机制开场自述：me.mech 非空且命中 9 类固定 key 时，把开场句换成机制自述
+#    （C7 人格化开场优先于它，两者都可用时只出 C7）。[]/认不出 → 通用开场句。
+mech_opening_enabled = true
+
+# ③ 机制切换分档：mode_switched.mech 的 twinGun/dualGun/siege/autocannon/rocket
+#    各有一对切入/切回话术；unknown/缺键 → 回到“战斗模式开了/切回普通了”。
+#    ⛔ 双管切换只说“模式切过来了”，不说“齐射”（协议没有 canMakeDualShot）。
+mech_switch_enabled = true
+
+# ── 路径写法示例（**不是**本插件的配置键，仅示范中性路径怎么写）──
+# 本插件只读上面 state_path 指向的 state.json，不读游戏安装目录；
+# 下面的游戏目录只在你自己的启动脚本/配套工具里用得着，照抄时换成你的真实路径：
+#   game_dir    = "D:\\Games\\World_of_Tanks"

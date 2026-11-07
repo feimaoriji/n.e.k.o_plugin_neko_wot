@@ -1,0 +1,10 @@
+[plugin]
+id = "neko_wot"
+name = "World of Tanks Copilot"
+version = "0.1.0"
+type = "plugin"
+entry = "plugin.plugins.neko_wot:NekoWotPlugin"
+
+[plugin.sdk]
+recommended = ">=0.1.0,<0.2.0"
+supported = ">=0.1.0,<0.3.0"

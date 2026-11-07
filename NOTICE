@@ -1,0 +1,40 @@
+World of Tanks Copilot (neko_wot)
+Copyright 2026 neko_wot contributors
+
+This project is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+--------------------------------------------------------------------------------
+Disclaimer
+--------------------------------------------------------------------------------
+
+This is an unofficial, fan-made companion plugin. It is not affiliated with,
+authorized, endorsed by, or sponsored by Wargaming.net, Wargaming Group Limited,
+or any of their subsidiaries or affiliates. "World of Tanks" and any related
+names, marks, and logos are trademarks or registered trademarks of their
+respective owners.
+
+This repository contains no game client code. It does not contain, link, embed,
+or ship decompiled, disassembled, or otherwise reverse-engineered game client
+material of any kind. It does not read or write game process memory, does not
+inject code into the game, and does not hook or modify rendering.
+
+The plugin only reads a local JSON file (state.json) produced by a separate,
+independently maintained and closed-source companion component, and only uses
+the field names, types, and semantics documented in docs/PROTOCOL.md. All
+broadcast lines are ordinary text; nothing in this project provides positional
+or tactical information about other players.
+
+--------------------------------------------------------------------------------
+声明
+--------------------------------------------------------------------------------
+
+本项目是非官方、玩家自制的陪伴插件，与 Wargaming.net、Wargaming Group Limited
+及其关联公司均无任何隶属、授权、背书或赞助关系。"World of Tanks" 及相关名称、
+标识为其各自权利人的商标或注册商标。
+
+本仓库**不含任何游戏客户端代码**，也不含反编译、反汇编或其它逆向工程得到的
+客户端材料；不读写游戏进程内存、不注入、不 hook、不修改渲染。
+
+插件只读取一个由**独立的、闭源的**配套组件写在本机的 JSON 文件（state.json），
+并且只使用 docs/PROTOCOL.md 里写明的字段名、类型与语义。所有播报都是普通文本，
+不提供任何关于其他玩家的位置或战术信息。

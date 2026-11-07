@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "seq": 42,
+  "ts": 1700000000.0,
+  "mode": "battle",
+  "arena_id": "demo-Ch71_WZ_219-0",
+  "game_version": "2.4.1.0",
+  "player_id": 1000000001,
+  "me": {
+    "name": "TestPlayer",
+    "vehicle": "Ch71_WZ_219",
+    "vehicle_name": "WZ-219",
+    "tier": 10,
+    "type": "heavyTank",
+    "health": 1892,
+    "max_health": 2200,
+    "health_ratio": 0.86,
+    "alive": true,
+    "pos": [123.4, -56.7, 890.1],
+    "ammo": {"ready": 1, "total": 36},
+    "reload_ratio": 0.42,
+    "crew": {
+      "commander": true,
+      "gunner": true,
+      "driver": true,
+      "radioman": true,
+      "loader": true
+    },
+    "modules": {
+      "engine": true,
+      "ammoBay": true,
+      "turretRotator": true,
+      "track": true,
+      "gun": true
+    },
+    "fires": 0,
+    "speed": 12.5
+  },
+  "team": {
+    "ally_alive": 13,
+    "ally_total": 15,
+    "enemy_alive": 11,
+    "enemy_total": 15
+  },
+  "result": null,
+  "events": [
+    {
+      "seq": 0,
+      "id": "battle_start",
+      "ts": 1699999990.0,
+      "payload": {"map": "拉斯威利", "vehicle": "WZ-219"}
+    },
+    {
+      "seq": 1,
+      "id": "you_damaged",
+      "ts": 1699999995.0,
+      "payload": {"ratio_after": 0.86}
+    },
+    {
+      "seq": 2,
+      "id": "you_killed",
+      "ts": 1699999998.0,
+      "payload": {"victim_type": "mediumTank"}
+    },
+    {
+      "seq": 3,
+      "id": "you_assisted",
+      "ts": 1699999999.0,
+      "payload": {"total": 340, "delta": 60}
+    }
+  ]
+}

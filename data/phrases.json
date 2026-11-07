@@ -1,0 +1,352 @@
+{
+  "version": 1,
+  "events": {
+    "battle_start": {
+      "with_vehicle": [
+        "开打了！{MASTER_NAME}，{vehicle} 上场，稳住。"
+      ],
+      "default": [
+        "开打了！{MASTER_NAME}，稳住。"
+      ],
+      "day": [
+        "今天第 {today} 局了。"
+      ],
+      "day_vehicle": [
+        "今天第 {today} 局，{vehicle} 又上了。"
+      ],
+      "vehicle_average": [
+        "这台车均伤 {avg}，今天第 {today} 局。"
+      ],
+      "vehicle_battles": [
+        "这台车 {battles} 局，今天第 {today} 局。"
+      ],
+      "mech_twin_gun": [
+        "双管车，记得能齐射。"
+      ],
+      "mech_twin_gun_switch": [
+        "双管车，两种打法都能切。"
+      ],
+      "mech_rocket": [
+        "火箭车，助推在。"
+      ],
+      "mech_hydro": [
+        "液气悬挂，车身能压。"
+      ],
+      "mech_susp_auto": [
+        "自动液压，车身自己压。"
+      ],
+      "mech_wheeled": [
+        "轮式车，跑得快。"
+      ],
+      "mech_drum": [
+        "弹鼓车，一梭子很猛。"
+      ],
+      "mech_autoreload": [
+        "弹会自己回来。"
+      ],
+      "mech_auto_cannon": [
+        "机关炮车，突突突。"
+      ]
+    },
+    "you_killed": {
+      "default": [
+        "击毁一台。{MASTER_NAME}，这一局第 {kills} 个。"
+      ],
+      "streak": [
+        "又干掉一台，第 {kills} 个！"
+      ],
+      "ammo": [
+        "弹药架殉爆了，第 {kills} 个！"
+      ],
+      "fire": [
+        "烧穿了，第 {kills} 个！"
+      ]
+    },
+    "you_died": {
+      "default": [
+        "我被击毁了…{MASTER_NAME}，缓一下。"
+      ]
+    },
+    "you_respawned": {
+      "default": [
+        "又活了！{MASTER_NAME}，接着干。"
+      ]
+    },
+    "on_fire": {
+      "default": [
+        "着火了！{MASTER_NAME}，快处理。"
+      ]
+    },
+    "fire_out": {
+      "default": [
+        "火灭了，缓一口气。"
+      ]
+    },
+    "you_damaged": {
+      "low_hp": [
+        "就剩个方向盘了",
+        "剩颗螺丝钉了",
+        "只剩一副履带了",
+        "剩个喇叭了"
+      ],
+      "low_hp_wrapped": [
+        "血量见底了，{low_hp}。"
+      ],
+      "big_hit": [
+        "挨了一下狠的，还有{spoken}血。"
+      ],
+      "plain_health": [
+        "还有{spoken}血。"
+      ],
+      "percent": [
+        "掉血了，还剩 {percent}% 的血。"
+      ],
+      "unknown": [
+        "掉血了，注意点。"
+      ],
+      "heavy": [
+        "这一下不轻。"
+      ],
+      "critical": [
+        "这一下够呛。"
+      ],
+      "swarm": [
+        "连着挨了几下，稳住。"
+      ]
+    },
+    "you_assisted": {
+      "big": [
+        "这一波帮得狠，协助伤害攒到{spoken}了。"
+      ],
+      "plain": [
+        "协助伤害攒到{spoken}了。"
+      ]
+    },
+    "module_damaged": {
+      "default": [
+        "有模块被打坏了。"
+      ]
+    },
+    "crew_dead": {
+      "default": [
+        "车组有人阵亡了。"
+      ]
+    },
+    "ammo_low": {
+      "with_total": [
+        "弹药只剩 {total} 发了。"
+      ],
+      "default": [
+        "弹药不多了。"
+      ]
+    },
+    "battle_end": {
+      "head": [
+        "这一局结束了，{MASTER_NAME}。"
+      ],
+      "draw": [
+        "打平了。"
+      ],
+      "win": [
+        "赢了！"
+      ],
+      "lose": [
+        "输了，下次再来。"
+      ],
+      "unknown": [
+        "打完了，结果没看清。"
+      ],
+      "recap_win_carry": [
+        "手感在线。"
+      ],
+      "recap_win_death": [
+        "搭进去一条命也值了。"
+      ],
+      "recap_lose_above_avg": [
+        "伤害比平时高，别往心里去。"
+      ],
+      "recap_lose_short": [
+        "这局太快了，不怪你。"
+      ],
+      "care_lose": [
+        "三局了，手是不是有点僵。"
+      ],
+      "care_win": [
+        "连着三局，这状态可以啊。"
+      ],
+      "kills_with_damage": [
+        "击毁 {kills} 台，打了 {damage} 伤害。"
+      ],
+      "kills_only": [
+        "击毁 {kills} 台。"
+      ],
+      "counted": [
+        "我数到击毁 {kills} 台。"
+      ],
+      "assist": [
+        "协助伤害 {assist}。"
+      ]
+    },
+    "you_hit": {
+      "blocked": [
+        "跳弹了。"
+      ],
+      "no_yaw": [
+        "挨了一下。"
+      ],
+      "sector": [
+        "{sector}挨了一下。"
+      ],
+      "blocked_plain": [
+        "跳弹了，没打穿。"
+      ],
+      "swarm": [
+        "连着挨了几下，稳住。"
+      ],
+      "track_critical": [
+        "履带伤了。"
+      ],
+      "track_destroyed": [
+        "履带断了。"
+      ],
+      "wheel_critical": [
+        "轮子伤了。"
+      ],
+      "wheel_destroyed": [
+        "轮子断了。"
+      ]
+    },
+    "mode_switched": {
+      "on": [
+        "战斗模式开了。"
+      ],
+      "off": [
+        "切回普通了。"
+      ],
+      "unknown": [
+        "模式切换了一下。"
+      ],
+      "twin_gun_on": [
+        "双管模式切过来了。"
+      ],
+      "twin_gun_off": [
+        "切回单发了。"
+      ],
+      "dual_gun_on": [
+        "双管模式切过来了。"
+      ],
+      "dual_gun_off": [
+        "切回单发了。"
+      ],
+      "siege_on": [
+        "攻城模式展开。"
+      ],
+      "siege_off": [
+        "攻城模式收起。"
+      ],
+      "autocannon_on": [
+        "机关炮模式开了。"
+      ],
+      "autocannon_off": [
+        "机关炮模式收了。"
+      ],
+      "rocket_on": [
+        "火箭助推开了。"
+      ],
+      "rocket_off": [
+        "助推收了。"
+      ]
+    },
+    "reload_done": {
+      "default": [
+        "炮弹上膛了，{MASTER_NAME}。"
+      ]
+    },
+    "hp_critical": {
+      "default": [
+        "血不多了，{MASTER_NAME}，收着点打。"
+      ]
+    },
+    "enemy_killed": {
+      "one": [
+        "干掉一个。"
+      ],
+      "many": [
+        "一口气干掉 {n} 个。"
+      ]
+    },
+    "ally_killed": {
+      "one": [
+        "我们这边少了一个。"
+      ],
+      "many": [
+        "我们少了 {n} 个。"
+      ]
+    },
+    "fire_cleared": {
+      "default": [
+        "火灭了，缓口气。"
+      ]
+    },
+    "suppressed": {
+      "default": [
+        "被盯上了，{MASTER_NAME}，先躲一下。"
+      ]
+    },
+    "enemy_low": {
+      "default": [
+        "我们这边快收尾了，别放跑，{MASTER_NAME}。"
+      ]
+    },
+    "time_low": {
+      "default": [
+        "时间不多了。"
+      ]
+    },
+    "team_behind": {
+      "default": [
+        "我们这边落后了，稳住。"
+      ],
+      "mild": [
+        "我们这边少一两个，还早。"
+      ],
+      "big": [
+        "人差得有点多，慢慢打。"
+      ],
+      "endgame": [
+        "就剩咱们几个了，我陪着。"
+      ]
+    },
+    "idle_company": {
+      "default": [
+        "我在呢，慢慢来。"
+      ]
+    },
+    "team_numbers": {
+      "big_advantage": [
+        "收尾了，敌方还剩 {enemy} 个。"
+      ],
+      "cleared": [
+        "都清完了，收尾吧。"
+      ],
+      "small_advantage": [
+        "多 {diff} 个，压上去。"
+      ],
+      "even": [
+        "势均力敌，{ally} 对 {enemy}。"
+      ],
+      "small_disadvantage": [
+        "少 {diff} 个，稳一稳，等支援。"
+      ],
+      "big_disadvantage": [
+        "人差太多了，收缩防守。"
+      ],
+      "wave": [
+        "这局一直补人，我方还剩 {ally} 个，别恋战。"
+      ],
+      "unknown": [
+        "人数看不到，我方还剩 {ally} 个，稳着打。"
+      ]
+    }
+  }
+}

@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+
+# 构建产物 / 打包临时目录
+vendor/
+target/
+/.vendor.staging-*
+/.vendor.backup-*
+
+# 编辑器与 IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 本地运行痕迹（绝不进仓库）
+*.log
+*.bak
+*.bak_*
+*.bak-*
+tmp/
+tmp_*/
+store.db
+.env
+.DS_Store
+Thumbs.db
