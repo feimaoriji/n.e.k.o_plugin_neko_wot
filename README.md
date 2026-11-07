@@ -11,11 +11,15 @@
 
 ### 这是什么
 
-`neko_wot` 是一个运行在插件宿主里的读端插件。它按 0.25 秒的节奏读取本机一个
+`neko_wot` 是一个运行在 N.E.K.O 插件宿主里的读端插件。它按 0.25 秒的节奏读取本机一个
 JSON 文件（`state.json`），由仲裁器决定"这一帧要不要说话、说什么"，然后把一句中文
 陪伴文本交给宿主通道。
 
 一句话：**只读文件、只说话。**
+
+> **范围说明**：本仓库**只发读端（插件）**。写端（把游戏状态写成 `state.json` 的配套组件）
+> 独立维护、闭源，**暂不分发**。所以单独装这个插件它会正常启动但**不会说话** —— 因为没人
+> 在写它读的那个文件。这是预期行为，不是 bug。
 
 ### 数据边界（合规自述）
 
@@ -180,11 +184,16 @@ Apache-2.0，全文见 [LICENSE](LICENSE)。本项目是非官方、玩家自制
 
 ## English
 
-> Draft — wording will be polished by the maintainer.
+### Scope: reader side only
+
+This repository ships **only the reader side** — the plugin. The companion *writer*
+component, which turns game state into `state.json`, is maintained separately and is
+**not distributed here**. Without it the plugin starts fine but stays silent, because
+nothing is writing the file it samples. That is expected, not a bug.
 
 ### What it is
 
-`neko_wot` is a reader-side plugin that runs inside a plugin host. Roughly four times a
+`neko_wot` is a reader-side plugin that runs inside the N.E.K.O plugin host. Roughly four times a
 second it samples a local JSON file (`state.json`), an arbiter decides whether this frame
 should speak and what to say, and one short line of Chinese companion text is handed to
 the host's chat/voice channel.
